@@ -51,9 +51,9 @@ export const NewsletterFooter = () => {
           className="mb-10 flex flex-col items-start justify-between gap-10 border-b pb-10 sm:mb-16 sm:pb-12 md:flex-row"
         >
           <div className="w-full max-w-full sm:max-w-sm">
-            <a href="/">
+            <div>
               <h2 className="mb-6 text-2xl font-bold text-primary">Markata</h2>
-            </a>
+            </div>
             <h3 className="mb-2 text-lg font-semibold">Get Travel Inspiration</h3>
             <p className="mb-8 text-base text-muted-foreground">
               Subscribe for exclusive deals and destination guides

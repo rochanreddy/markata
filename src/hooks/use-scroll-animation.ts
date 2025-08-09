@@ -23,7 +23,7 @@ export interface AnimationState {
   isVisible: boolean
   hasTriggered: boolean
   style: React.CSSProperties
-  ref: React.RefObject<HTMLElement>
+  ref: React.RefObject<HTMLElement | null>
 }
 
 export interface StaggerAnimationState {
@@ -175,7 +175,10 @@ export const useScrollAnimation = (
       ...animationConfig,
       '--animation-duration': `${duration}ms`,
       '--animation-easing': easing,
-    } as React.CSSProperties
+    } as React.CSSProperties & {
+      '--animation-duration'?: string
+      '--animation-easing'?: string
+    }
   }, [variant, isVisible, duration, easing, shouldAnimate])
 
   return {
@@ -330,7 +333,10 @@ export const useStaggerAnimation = (
         ...(shouldAnimate ? getAnimationConfig(variant, isVisible) : { opacity: 1 }),
         '--animation-duration': `${elementDuration}ms`,
         '--animation-easing': easing,
-      } as React.CSSProperties
+      } as React.CSSProperties & {
+        '--animation-duration'?: string
+        '--animation-easing'?: string
+      }
 
       return {
         isVisible,
@@ -386,7 +392,10 @@ export const useAnimationOnMount = (
       ...animationConfig,
       '--animation-duration': `${duration}ms`,
       '--animation-easing': easing,
-    } as React.CSSProperties
+    } as React.CSSProperties & {
+      '--animation-duration'?: string
+      '--animation-easing'?: string
+    }
   }, [variant, isVisible, duration, easing, disabled])
 
   return {

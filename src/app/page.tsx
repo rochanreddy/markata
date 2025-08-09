@@ -1,3 +1,4 @@
+import React from "react";
 import { FloatingNavbar } from "@/components/navbars/floating-navbar";
 import { GlassmorphicHero } from "@/components/heros/glassmorphic-hero";
 import { AsymmetricBentoLayout } from "@/components/bentos/asymmetric-bento-layout";

@@ -9,7 +9,7 @@ interface UseSimpleScrollOptions {
 }
 
 interface UseSimpleScrollReturn {
-  ref: React.RefObject<HTMLDivElement>;
+  ref: React.RefObject<HTMLDivElement | null>;
   style: React.CSSProperties;
   isVisible: boolean;
 }
