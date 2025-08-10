@@ -131,16 +131,16 @@ export default function TabbedBookingForm() {
   ]
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 bg-background">
+    <div className="w-full max-w-4xl mx-auto p-4 sm:p-6 bg-background">
       <div 
         ref={headerAnimation.ref}
         style={headerAnimation.style}
-        className="text-center mb-8"
+        className="text-center mb-6 sm:mb-8"
       >
-        <h1 className="text-3xl font-display font-bold text-foreground mb-2">
+        <h1 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-2">
           Book Your Perfect Journey
         </h1>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground px-4">
           Choose from hotels, bus tickets, or complete travel packages
         </p>
       </div>
@@ -150,26 +150,29 @@ export default function TabbedBookingForm() {
         style={cardAnimation.style}
         className="bg-card border-border shadow-lg hover:shadow-xl transition-all duration-500 hover:border-primary/20"
       >
-        <CardContent className="p-6">
+        <CardContent className="p-4 sm:p-6">
           <Tabs defaultValue="hotels" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8 bg-muted">
-              <TabsTrigger value="hotels" className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
+            <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-6 sm:mb-8 bg-muted h-auto">
+              <TabsTrigger value="hotels" className="flex items-center justify-center gap-2 py-3 px-4 transition-all duration-300 hover:scale-105 text-sm sm:text-base">
                 <Home className="w-4 h-4" />
-                Hotels
+                <span className="hidden sm:inline">Hotels</span>
+                <span className="sm:hidden">Hotels</span>
               </TabsTrigger>
-              <TabsTrigger value="bus" className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
+              <TabsTrigger value="bus" className="flex items-center justify-center gap-2 py-3 px-4 transition-all duration-300 hover:scale-105 text-sm sm:text-base">
                 <Car className="w-4 h-4" />
-                Bus Tickets
+                <span className="hidden sm:inline">Bus Tickets</span>
+                <span className="sm:hidden">Bus</span>
               </TabsTrigger>
-              <TabsTrigger value="packages" className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
+              <TabsTrigger value="packages" className="flex items-center justify-center gap-2 py-3 px-4 transition-all duration-300 hover:scale-105 text-sm sm:text-base">
                 <Plane className="w-4 h-4" />
-                Travel Packages
+                <span className="hidden sm:inline">Travel Packages</span>
+                <span className="sm:hidden">Packages</span>
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="hotels" className="mt-6">
-              <form onSubmit={handleHotelSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <TabsContent value="hotels" className="mt-4 sm:mt-6">
+              <form onSubmit={handleHotelSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="destination" className="text-sm font-medium">
                       Destination
@@ -192,7 +195,7 @@ export default function TabbedBookingForm() {
                     </Select>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label className="text-sm font-medium">Guests</Label>
                       <Select
@@ -234,7 +237,7 @@ export default function TabbedBookingForm() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <Label className="text-sm font-medium">Check-in Date</Label>
                     <DatePicker
@@ -265,9 +268,9 @@ export default function TabbedBookingForm() {
               </form>
             </TabsContent>
 
-            <TabsContent value="bus" className="mt-6">
-              <form onSubmit={handleBusSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <TabsContent value="bus" className="mt-4 sm:mt-6">
+              <form onSubmit={handleBusSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="from" className="text-sm font-medium">
                       From
@@ -314,7 +317,7 @@ export default function TabbedBookingForm() {
                   </Label>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <Label className="text-sm font-medium">Departure Date</Label>
                     <DatePicker
@@ -367,9 +370,9 @@ export default function TabbedBookingForm() {
               </form>
             </TabsContent>
 
-            <TabsContent value="packages" className="mt-6">
-              <form onSubmit={handlePackageSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <TabsContent value="packages" className="mt-4 sm:mt-6">
+              <form onSubmit={handlePackageSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="package-destination" className="text-sm font-medium">
                       Destination
@@ -418,7 +421,7 @@ export default function TabbedBookingForm() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                   <div className="space-y-2">
                     <Label className="text-sm font-medium">Start Date</Label>
                     <DatePicker

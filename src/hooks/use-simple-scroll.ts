@@ -19,23 +19,17 @@ export const useSimpleScroll = (options: UseSimpleScrollOptions = {}): UseSimple
   
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [isClient, setIsClient] = useState(false);
   
-  // Check if we're on the client side to prevent hydration issues
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   // Check for reduced motion preference
   const prefersReducedMotion = useMemo(() => {
-    if (!isClient) return false;
+    if (typeof window === 'undefined') return false;
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }, [isClient]);
+  }, []);
 
   useEffect(() => {
-    if (!isClient || !ref.current || prefersReducedMotion) {
-      // For SSR, reduced motion, or before client hydration, show element immediately
-      if (prefersReducedMotion && isClient) {
+    if (!ref.current || prefersReducedMotion) {
+      // For reduced motion, show element immediately
+      if (prefersReducedMotion) {
         setIsVisible(true);
       }
       return;
@@ -73,12 +67,12 @@ export const useSimpleScroll = (options: UseSimpleScrollOptions = {}): UseSimple
         clearTimeout(timeoutId);
       }
     };
-  }, [threshold, delay, isClient, prefersReducedMotion]);
+  }, [threshold, delay, prefersReducedMotion]);
 
   // Generate styles based on animation type and visibility state
   const style = useMemo((): React.CSSProperties => {
     // For SSR or reduced motion, always show the element
-    if (!isClient || prefersReducedMotion) {
+    if (typeof window === 'undefined' || prefersReducedMotion) {
       return {
         opacity: 1,
         transform: 'none',
@@ -114,11 +108,11 @@ export const useSimpleScroll = (options: UseSimpleScrollOptions = {}): UseSimple
           transform: 'translateY(0px)',
         };
     }
-  }, [isVisible, animation, isClient, prefersReducedMotion]);
+  }, [isVisible, animation, prefersReducedMotion]);
 
   return {
     ref,
     style,
-    isVisible: isClient ? isVisible : true, // For SSR, always return true
+    isVisible: typeof window === 'undefined' ? true : isVisible, // For SSR, always return true
   };
 };

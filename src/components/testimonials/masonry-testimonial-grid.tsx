@@ -3,7 +3,6 @@
 import { Star } from "lucide-react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { useSimpleScroll } from "@/hooks/use-simple-scroll";
-import { useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -87,27 +86,8 @@ const DATA: DataItem[] = [
 ];
 
 const MasonryTestimonialGrid = () => {
-  const [isClient, setIsClient] = useState(false);
   const headerAnimation = useSimpleScroll({ delay: 0, animation: 'slideUp' });
   const gridAnimation = useSimpleScroll({ delay: 200, animation: 'fadeIn' });
-
-  // Ensure consistent rendering between server and client
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Function to determine if a testimonial should be visible
-  const getVisibilityClass = (idx: number) => {
-    if (!isClient) {
-      // During SSR, show only the first 3 items to match the initial mobile view
-      return idx > 2 ? "hidden" : "";
-    }
-    // On client, use responsive classes
-    return cn(
-      idx > 3 && idx <= 5 && "hidden md:block",
-      idx > 5 && "hidden lg:block"
-    );
-  };
 
   return (
     <section className="bg-background py-32">
@@ -137,7 +117,9 @@ const MasonryTestimonialGrid = () => {
                   key={`testimonial-${idx}-${testimonial.name}`}
                   className={cn(
                     "rounded-xl p-5 shadow-sm border hover:shadow-lg hover:border-primary/20 transition-all duration-500 hover:scale-[1.02]",
-                    getVisibilityClass(idx),
+                    // Use responsive visibility classes that work consistently on both server and client
+                    idx > 3 && idx <= 5 && "hidden md:block",
+                    idx > 5 && "hidden lg:block",
                     testimonial.margin
                   )}
                 >
