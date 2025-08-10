@@ -1,10 +1,7 @@
 import type { NextConfig } from "next";
-import path from "node:path";
-
-const LOADER = path.resolve(__dirname, 'src/visual-edits/component-tagger-loader.js');
 
 const nextConfig: NextConfig = {
-  // 👇 this forces server output so Vercel gets routes-manifest.json
+  // Ensure proper server-side output for Vercel
   output: undefined,
 
   images: {
@@ -19,13 +16,13 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  outputFileTracingRoot: path.resolve(__dirname, '../../'),
-  turbopack: {
-    rules: {
-      "*.{jsx,tsx}": {
-        loaders: [LOADER]
-      }
-    }
+  
+  // Ensure proper build output
+  trailingSlash: false,
+  
+  // Disable experimental features for production builds
+  experimental: {
+    // Remove experimental features for now
   }
 };
 
